@@ -1,7 +1,7 @@
 .center {
   display: block;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 25%;
   width: 50%;
 }
 
@@ -14,6 +14,10 @@ h1 {
 }
 
 h2 {
+    text-align: center;
+}
+
+h4 {
     text-align: center;
 }
 
@@ -101,24 +105,32 @@ img.right {
 
 /* selectors for project experience visual */
 
-.experience {
+div.wideCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+div.expInformatic {
     margin-top: 20px;
-    margin-left: 20%;
-    max-width: 30%;
-    border-right-style: solid;
-    border-color: black;
-    padding: 5px;
+    border-style: solid;
+    border-top-color: black;
+    border-radius: 10px;
+    width: 50%;
 }
 
-.experience h3 {
-    padding: 20px;
-    border-bottom-style: solid;
-    border-color: black;
+div.expText {
+    text-align: center;
 }
 
-.experience h4 {
-    padding: 5px;
+div.expInformatic img {
+    max-width: 80%;
+    margin-left: 10%;
+    padding: 10px;
+    margin-right: auto;
 }
+
 
 
 /* gallery stylers */
@@ -126,7 +138,9 @@ img.right {
   display: flex;
   flex-wrap: wrap;
   padding: 0 4px;
-  margin: 20%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 20px;
 }
 
 .column {
@@ -140,3 +154,33 @@ img.right {
   max-width: 33%;
 }
 
+/* Hobbie and project */
+div.content {
+    margin: 20px;
+    border-style: solid;
+    padding: 10px;
+    text-align: center;
+}
+
+/**/
+
+
+
+div.captionedImage {
+    width: 100%;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: black;
+    color: white;
+}
+
+div.captionedImage img {
+    max-width: 100%;
+}
+
+div.caption {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+/**/
