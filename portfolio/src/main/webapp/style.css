@@ -1,13 +1,3 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
-}
-
-#greeting-container {
-  margin-top: 20px;
-}
-
 .center {
   display: block;
   margin-left: auto;
@@ -27,21 +17,19 @@ h2 {
     text-align: center;
 }
 
-.pageTop {
-    background-color: whitesmoke;
-    width: 100%;
-    
-}
-
-.navBar {
-    background-color: grey;
-    overflow: hidden;
-}
 
 body {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+/* style box for h1 area */
+.pageTop {
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+
+/* navigation bar */
 ul {
     list-style-type: none;
     margin: 0;
@@ -73,23 +61,21 @@ ul {
     color: white;
 }
 
+/*line under divs */
+
 .underline {
     border-style: hidden hidden solid hidden;
     border-color: grey;
 }
+
+/* rounded bottom border */
 
 .rounded {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-.lesserHeader {
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-color: grey;
-    width: 100%;
-}
-
+/*container for paragraphs*/
 .pBox {
     border-color: rgb(0, 0, 0);
     border-style: hidden;
@@ -98,7 +84,7 @@ ul {
     width: 30%;
     padding: 20px;
 }
-
+/**/
 img.right {
     float: right;
     width: 20%;
@@ -106,11 +92,14 @@ img.right {
     padding: 10px;
 }
 
+/*selector adds padding above element */
+
 .downShifted {
     padding-top: 40px;
     overflow: auto;
 }
 
+/* selectors for project experience visual */
 
 .experience {
     margin-top: 20px;
@@ -131,6 +120,8 @@ img.right {
     padding: 5px;
 }
 
+
+/* gallery stylers */
 .row {
   display: flex;
   flex-wrap: wrap;
