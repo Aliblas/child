@@ -1,9 +1,186 @@
-#content {
+.center {
+  display: block;
   margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+  margin-right: 25%;
+  width: 50%;
 }
 
-#greeting-container {
+h1 {
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1;
+    color: black;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* style box for h1 area */
+.pageTop {
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+
+/* navigation bar */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.navBar {
+    background-color: black;
+    overflow: hidden;
+}
+
+.navBar a {
+    color: white;
+    display: box;
+    float: left;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navBar a:hover {
+    background-color: white;
+    color: blueviolet;
+}
+
+.active {
+    background-color: blueviolet;
+    color: white;
+}
+
+/*line under divs */
+
+.underline {
+    border-style: hidden hidden solid hidden;
+    border-color: grey;
+}
+
+/* rounded bottom border */
+
+.rounded {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/*container for paragraphs*/
+.pBox {
+    border-color: rgb(0, 0, 0);
+    border-style: hidden;
+    margin-left: 25%;
+    margin-right: auto;
+    width: 30%;
+    padding: 20px;
+}
+/**/
+img.right {
+    float: right;
+    width: 20%;
+    margin-right: 25%;
+    padding: 10px;
+}
+
+/*selector adds padding above element */
+
+.downShifted {
+    padding-top: 40px;
+    overflow: auto;
+}
+
+/* selectors for project experience visual */
+
+div.wideCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+div.expInformatic {
+    margin-top: 20px;
+    border-style: solid;
+    border-top-color: black;
+    border-radius: 10px;
+    width: 50%;
+}
+
+div.expText {
+    text-align: center;
+}
+
+div.expInformatic img {
+    max-width: 80%;
+    margin-left: 10%;
+    padding: 10px;
+    margin-right: auto;
+}
+
+
+
+/* gallery stylers */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 20px;
 }
+
+.column {
+  flex: 50%;
+  padding: 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  max-width: 33%;
+}
+
+/* Hobbie and project */
+div.content {
+    margin: 20px;
+    border-style: solid;
+    padding: 10px;
+    text-align: center;
+}
+
+/**/
+
+
+
+div.captionedImage {
+    width: 100%;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: black;
+    color: white;
+}
+
+div.captionedImage img {
+    max-width: 100%;
+}
+
+div.caption {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+/**/
