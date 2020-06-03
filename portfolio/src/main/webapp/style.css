@@ -6,10 +6,10 @@
 }
 
 h1 {
-    padding: 20px;
+    color: black;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1;
-    color: black;
+    padding: 20px;
     text-align: center;
 }
 
@@ -21,7 +21,6 @@ h4 {
     text-align: center;
 }
 
-
 body {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -32,13 +31,11 @@ body {
     width: 100%;
 }
 
-
 /* navigation bar */
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-
 }
 
 .navBar {
@@ -50,9 +47,9 @@ ul {
     color: white;
     display: box;
     float: left;
+    font-weight: bold;
     padding: 14px 16px;
     text-decoration: none;
-    font-weight: bold;
 }
 
 .navBar a:hover {
@@ -65,11 +62,10 @@ ul {
     color: white;
 }
 
-/*line under divs */
-
+/* line under divs */
 .underline {
-    border-style: hidden hidden solid hidden;
     border-color: grey;
+    border-style: hidden hidden solid hidden;
 }
 
 /* rounded bottom border */
@@ -79,25 +75,24 @@ ul {
     border-bottom-right-radius: 10px;
 }
 
-/*container for paragraphs*/
+/* container for paragraphs */
 .pBox {
     border-color: rgb(0, 0, 0);
     border-style: hidden;
     margin-left: 25%;
     margin-right: auto;
-    width: 30%;
     padding: 20px;
+    width: 30%;
 }
-/**/
+
 img.right {
     float: right;
-    width: 20%;
     margin-right: 25%;
     padding: 10px;
+    width: 20%;
 }
 
-/*selector adds padding above element */
-
+/* selector adds padding above element */
 .downShifted {
     padding-top: 40px;
     overflow: auto;
@@ -113,10 +108,10 @@ div.wideCenter {
 }
 
 div.expInformatic {
-    margin-top: 20px;
+    border-radius: 10px;
     border-style: solid;
     border-top-color: black;
-    border-radius: 10px;
+    margin-top: 20px;
     width: 50%;
 }
 
@@ -125,53 +120,49 @@ div.expText {
 }
 
 div.expInformatic img {
-    max-width: 80%;
     margin-left: 10%;
-    padding: 10px;
     margin-right: auto;
+    max-width: 80%;
+    padding: 10px;
 }
 
 
 
 /* gallery stylers */
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 20px;
+    padding: 0 4px;
 }
 
 .column {
-  flex: 50%;
-  padding: 4px;
+    flex: 50%;
+    padding: 4px;
 }
 
 .column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  max-width: 33%;
+    margin-top: 8px;
+    max-width: 33%;
+    vertical-align: middle;
 }
 
 /* Hobbie and project */
 div.content {
-    margin: 20px;
     border-style: solid;
+    margin: 20px;
     padding: 10px;
     text-align: center;
 }
 
-/**/
-
-
-
 div.captionedImage {
-    width: 100%;
-    margin-left: auto;
-    margin-right:auto;
     background-color: black;
     color: white;
+    margin-left: auto;
+    margin-right:auto;
+    width: 100%;
 }
 
 div.captionedImage img {
@@ -179,8 +170,6 @@ div.captionedImage img {
 }
 
 div.caption {
-    text-align: center;
     padding: 10px 20px;
+    text-align: center;
 }
-
-/**/
