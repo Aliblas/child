@@ -15,6 +15,7 @@
 /**
  * Adds a random greeting to the page.
  */
+ /*
 function addRandomGreeting() {
   const greetings =
       ['yes', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
@@ -26,4 +27,11 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+*/
 
+function getSurprise() {
+
+    fetch('/data').then(response => response.text()).then((surprise) => {
+        document.getElementById('surpriseContainer').innerHTML = surprise;
+    });
+}

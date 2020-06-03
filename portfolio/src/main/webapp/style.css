@@ -173,3 +173,7 @@ div.caption {
     padding: 10px 20px;
     text-align: center;
 }
+
+#surpriseContainer {
+    margin: 10px;
+}
