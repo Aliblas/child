@@ -29,9 +29,23 @@ function addRandomGreeting() {
 }
 */
 
-function getSurprise() {
+function getComments() {
+    console.log('fetching comments from server');
+    
+    fetch('/data').then(response => response.json()).then((commentsJson) => {
 
-    fetch('/data').then(response => response.text()).then((surprise) => {
-        document.getElementById('surpriseContainer').innerHTML = surprise;
+        const commentListElt = document.getElementById('comments');
+        commentListElt.innerHtml = '';
+
+        for (comment of commentsJson) {
+            console.log(comment);
+            commentListElt.appendChild(createListElt(comment));
+        }
     });
+}
+
+function createListElt(text) {
+    const liElt = document.createElement("LI");
+    liElt.innerText = text;
+    return liElt;
 }
