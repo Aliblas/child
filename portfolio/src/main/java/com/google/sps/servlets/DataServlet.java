@@ -20,14 +20,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import com.google.gson.Gson;
+
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   ArrayList<String> comments = new ArrayList<String>(
-      Array.asList("Wow such website", "Yeah, good. Okay.", "Chicken."));
+      Arrays.asList("Wow such website", "Yeah, good. Okay.", "Chicken."));
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
