@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Iterator;
 import com.google.gson.Gson;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -41,8 +42,14 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("Comment");
     PreparedQuery results = datastore.prepare(query);
 
+    int commentSizeCapacity = 5;
     List<String> commentsList = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    Iterator<Entity> entityIterator = results.asIterator();
+    for (int i = 0; i < commentSizeCapacity; i++) {
+        
+        if (!entityIterator.hasNext()) break;
+        Entity entity = entityIterator.next();
+
         long id = entity.getKey().getId();
         String commentString = (String)entity.getProperty("commentString");
         commentsList.add(commentString);
