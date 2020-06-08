@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload='getComments()'>
 
     <div id='headerPos' class='pageTop underline'>
         <h1>Ali's Portfolio</h1>
@@ -32,10 +32,12 @@
             Hi and welcome to my first website. I am junior studying Computer Engineering at the University of Michigan in Ann Arbor.
             I am originally from the city of Portland, Oregon. I enjoy learning new things, spending time outside, or consuming food.
             Please enjoy your stay.
-            
         </p>
     </div>
 
-    
+    <div id='commentsContainer'>
+        <h4>Comments</h4>
+        <ul id='comments'></ul>
+    </div>
   </body>
 </html>

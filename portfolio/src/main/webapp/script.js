@@ -15,6 +15,7 @@
 /**
  * Adds a random greeting to the page.
  */
+ /*
 function addRandomGreeting() {
   const greetings =
       ['yes', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
@@ -26,4 +27,25 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+*/
 
+function getComments() {
+    console.log('fetching comments from server');
+    
+    fetch('/data').then(response => response.json()).then((commentsJson) => {
+
+        const commentListElt = document.getElementById('comments');
+        commentListElt.innerHtml = '';
+
+        for (comment of commentsJson) {
+            console.log(comment);
+            commentListElt.appendChild(createListElt(comment));
+        }
+    });
+}
+
+function createListElt(text) {
+    const liElt = document.createElement("LI");
+    liElt.innerText = text;
+    return liElt;
+}
