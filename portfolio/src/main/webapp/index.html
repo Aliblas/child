@@ -6,40 +6,40 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload='getComments()'>
+  <body onload="getComments()">
 
-    <div id='headerPos' class='pageTop underline'>
+    <div id="headerPos" class="pageTop underline">
         <h1>Ali's Portfolio</h1>
     </div>
 
-    <div class='navBar'>
+    <div class="navBar">
         <ul>
-            <li><a class='active' href='#headerPos'>About Me</a></li>
-            <li><a href='projects.html'>Projects</a></li>
-            <li><a href='hobbies.html'>Hobbies</a></li>
-            <li><a href='exp.html'>Professional Experience</a></li>
-            <li><a href='gallery.html'>Gallery</a></li>
-            <li><a href='blog.html'>Blog</a></li>
+            <li><a class="active" href="#headerPos">About Me</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="exp.html">Professional Experience</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
         </ul>
     </div>
 
-    <div class='underline'>
-        <h2 class='center'>About Ali Bashir</h2>
+    <div class="underline">
+        <h2 class="center">About Ali Bashir</h2>
     </div>
-    <div class='downShifted'>
-        <img src='images/withFish.jpeg' alt='withFish' class='right'>
-        <p class='pBox'>
+    <div class="downShifted">
+        <img src="images/withFish.jpeg" alt="withFish" class="right">
+        <p class="pBox">
             Hi and welcome to my first website. I am junior studying Computer Engineering at the University of Michigan in Ann Arbor.
             I am originally from the city of Portland, Oregon. I enjoy learning new things, spending time outside, or consuming food.
             Please enjoy your stay.
         </p>
     </div>
 
-    <div id='commentsContainer'>
+    <div id="commentsContainer">
         <h4>Comments</h4>
-        <ul id='comments'></ul>
-        <form action='/data' method='POST'>
-            <input type='text' name='comment-input'>
+        <ul id="comments"></ul>
+        <form action="/data" method="POST">
+            <input type="text" name="comment-input">
         </form>
     </div>
   </body>

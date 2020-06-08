@@ -177,10 +177,8 @@ div.caption {
 /* comments styles */
 
 #commentsContainer {
-    margin-top: 120px;
+    margin: 120px 50% 0px;
     width: 50%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #commentsContainer h4 {

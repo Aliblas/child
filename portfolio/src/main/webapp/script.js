@@ -12,40 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
- /*
-function addRandomGreeting() {
-  const greetings =
-      ['yes', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-*/
 
 function getComments() {
     console.log('fetching comments from server');
     
     fetch('/data').then(response => response.json()).then((commentsJson) => {
 
-        const commentListElt = document.getElementById('comments');
-        commentListElt.innerHtml = '';
+        const commentListElement= document.getElementById('comments');
+        commentListElement.innerHtml = '';
 
         for (comment of commentsJson) {
             console.log(comment);
-            commentListElt.appendChild(createListElt(comment));
+            commentListElement.appendChild(createListElement(comment));
         }
     });
 }
 
-function createListElt(text) {
-    const liElt = document.createElement("LI");
-    liElt.innerText = text;
-    return liElt;
+function createListElement(text) {
+    const liElement = document.createElement("LI");
+    liElement.innerText = text;
+    return liElement;
 }
