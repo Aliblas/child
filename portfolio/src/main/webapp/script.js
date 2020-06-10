@@ -13,16 +13,15 @@
 
 
 function getComments() {
-    console.log('fetching comments from server');
+    console.log("fetching comments from server");
+    document.getElementById("comments").innerHTML = "";
+
+    var commentCapacity = document.getElementById("comment-number").value;
     
-    commentCapacity = document.getElementById('comment-capacity');
-    if (commentCapacity == null) commentCapacity = 0;
-    
-    fetch('/data?comment-capacity=5').then(response => response.json()).then((commentsJson) => {
+    fetch("/data?comment-capacity=" + commentCapacity).then(response => response.json()).then((commentsJson) => {
 
         console.log(commentsJson);
-        const commentSectionElement= document.getElementById('comments');
-        commentSectionElement.innerHtml = '';
+        const commentSectionElement= document.getElementById("comments");
 
         for (comment of commentsJson) {
             commentSectionElement.appendChild(createCommentElement(comment));
