@@ -9,20 +9,22 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+clo// limitations under the License.
 
 
 function getComments() {
     console.log('fetching comments from server');
     
-    fetch('/data').then(response => response.json()).then((commentsJson) => {
+    commentCapacity = document.getElementById('comment-capacity');
+    if (commentCapacity == null) commentCapacity = 0;
+    
+    fetch('/data?comment-capacity=5').then(response => response.json()).then((commentsJson) => {
 
+        console.log(commentsJson);
         const commentListElement= document.getElementById('comments');
-        commentListElement.innerHtml = '';
+        commentListElement.innerHtml = '';3
 
         for (comment of commentsJson) {
-            console.log(comment);
             commentListElement.appendChild(createListElement(comment));
         }
     });

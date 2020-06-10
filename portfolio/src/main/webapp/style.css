@@ -177,7 +177,7 @@ div.caption {
 /* comments styles */
 
 #commentsContainer {
-    margin: 120px 50% 0px;
+    margin: 120px auto 0px;
     width: 50%;
 }
 
@@ -189,3 +189,38 @@ div.caption {
     padding-bottom: 16px;
 }
 
+/* Comment Loader Button Styles */
+
+#show-comments-div {
+    margin-bottom: 40px;
+}
+
+#show-comments-div form {
+    margin: auto;
+    width: 250px;
+}
+
+#show-comments-div * {
+    box-sizing: border-box;
+    display: flex;
+    font-size: 16px;
+}
+
+
+#show-comments-div input[type="button"] {
+    border-style: none;
+    background-color: blueviolet;
+    color: white;
+    float: left;
+    padding: 20px;
+    width: 70%;
+}
+
+#show-comments-div input[type="number"] {
+    background-color: blueviolet;
+    border-style: none;
+    color: white;
+    flex-grow: 1;
+    padding: 20px;
+    width: 30%;
+}
