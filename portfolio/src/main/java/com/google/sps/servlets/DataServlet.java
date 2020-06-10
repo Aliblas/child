@@ -42,10 +42,14 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("Comment");
     PreparedQuery results = datastore.prepare(query);
 
-    int commentSizeCapacity = 5;
+    String queryString = request.getParameter("comment-capacity");
+    int commentCapacity = Integer.parseInt(queryString);
+
+    System.out.println("Preparing " + commentCapacity + " comments.");
+
     List<String> commentsList = new ArrayList<>();
     Iterator<Entity> entityIterator = results.asIterator();
-    for (int i = 0; i < commentSizeCapacity; i++) {
+    for (int i = 0; i < commentCapacity; i++) {
         
         if (!entityIterator.hasNext()) break;
         Entity entity = entityIterator.next();
@@ -59,6 +63,7 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(commentsJson);
 
+    //response.sendRedirect("/index.html");
   }
 
   @Override

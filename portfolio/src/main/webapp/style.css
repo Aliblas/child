@@ -216,6 +216,10 @@ div.caption {
     width: 70%;
 }
 
+#show-comments-div input[type="button"]:hover {
+    
+}
+
 #show-comments-div input[type="number"] {
     background-color: blueviolet;
     border-style: none;
