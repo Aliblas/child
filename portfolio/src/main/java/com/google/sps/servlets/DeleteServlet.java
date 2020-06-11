@@ -38,11 +38,13 @@ public class DeleteServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        Query query = new query("Comment");
+        Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
 
         for (Entity commentEntity : results.asIterable()) {
             datastore.delete(commentEntity.getKey());
         }
+        response.setContentType("text/html");
+        response.getWriter().println("Delete action completed");
     }
 }

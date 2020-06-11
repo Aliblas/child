@@ -34,3 +34,8 @@ function createCommentElement(text) {
     pElement.innerText = text;
     return pElement;
 }
+
+function deleteComments() {
+    console.log("fetching deletion");
+    fetch("/delete-data", { method: "post" }).then(response => console.log(response.text()));
+}
