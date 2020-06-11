@@ -26,7 +26,7 @@ body {
 }
 
 /* style box for h1 area */
-.pageTop {
+.page-top {
     background-color: whitesmoke;
     width: 100%;
 }
@@ -76,7 +76,7 @@ ul {
 }
 
 /* container for paragraphs */
-.pBox {
+.p-box {
     border-color: rgb(0, 0, 0);
     border-style: hidden;
     margin-left: 25%;
@@ -93,21 +93,21 @@ img.right {
 }
 
 /* selector adds padding above element */
-.downShifted {
+.down-shifted {
     padding-top: 40px;
     overflow: auto;
 }
 
 /* selectors for project experience visual */
 
-div.wideCenter {
+div.wide-center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 70%;
 }
 
-div.expInformatic {
+div.experience-box {
     border-radius: 10px;
     border-style: solid;
     border-top-color: black;
@@ -115,11 +115,11 @@ div.expInformatic {
     width: 50%;
 }
 
-div.expText {
+div.experience-text {
     text-align: center;
 }
 
-div.expInformatic img {
+div.experience-box img {
     margin-left: 10%;
     margin-right: auto;
     max-width: 80%;
@@ -157,7 +157,7 @@ div.content {
     text-align: center;
 }
 
-div.captionedImage {
+div.captioned-image {
     background-color: black;
     color: white;
     margin-left: auto;
@@ -165,7 +165,7 @@ div.captionedImage {
     width: 100%;
 }
 
-div.captionedImage img {
+div.captioned-image img {
     max-width: 100%;
 }
 
@@ -176,12 +176,12 @@ div.caption {
 
 /* comments styles */
 
-#commentsContainer {
+#comments-container {
     margin: 120px auto 0px;
     width: 50%;
 }
 
-#commentsContainer h4 {
+#comments-container h4 {
     padding-bottom: 20px;
 }
 
@@ -247,10 +247,10 @@ div.caption {
     width: 100px;
 }
 
-#commentsContainer input[type="button"]:hover {
+#comments-container input[type="button"]:hover {
     cursor: pointer;
 }
 
-#commentsContainer input[type="submit"]:hover {
+#comments-container input[type="submit"]:hover {
     cursor:pointer;
 }
