@@ -224,3 +224,15 @@ div.caption {
     padding: 20px;
     width: 30%;
 }
+
+#delete-button-container {
+    margin-top: 80px;
+    text-align: center;
+}
+
+#delete-button-container input[type="button"] {
+    background-color: blueviolet;
+    border-style: none;
+    color: white;
+    padding: 10px;
+}
