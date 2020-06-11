@@ -6,38 +6,50 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload='getComments()'>
+  <body onload="getComments()">
 
-    <div id='headerPos' class='pageTop underline'>
+    <div id="header-pos" class="page-top underline">
         <h1>Ali's Portfolio</h1>
     </div>
 
-    <div class='navBar'>
+    <div class="navBar">
         <ul>
-            <li><a class='active' href='#headerPos'>About Me</a></li>
-            <li><a href='projects.html'>Projects</a></li>
-            <li><a href='hobbies.html'>Hobbies</a></li>
-            <li><a href='exp.html'>Professional Experience</a></li>
-            <li><a href='gallery.html'>Gallery</a></li>
-            <li><a href='blog.html'>Blog</a></li>
+            <li><a class="active" href="index.html">About Me</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="exp.html">Professional Experience</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
         </ul>
     </div>
 
-    <div class='underline'>
-        <h2 class='center'>About Ali Bashir</h2>
+    <div class="underline">
+        <h2 class="center">About Ali Bashir</h2>
     </div>
-    <div class='downShifted'>
-        <img src='images/withFish.jpeg' alt='withFish' class='right'>
-        <p class='pBox'>
+    <div class="down-shifted">
+        <img src="images/withFish.jpeg" alt="withFish" class="right">
+        <p class="p-box">
             Hi and welcome to my first website. I am junior studying Computer Engineering at the University of Michigan in Ann Arbor.
             I am originally from the city of Portland, Oregon. I enjoy learning new things, spending time outside, or consuming food.
             Please enjoy your stay.
         </p>
     </div>
 
-    <div id='commentsContainer'>
-        <h4>Comments</h4>
-        <ul id='comments'></ul>
+    <div id="comments-container">
+        <div id="show-comments-div">
+            <form>
+                <input type="button" value="Show Comments" onclick="getComments()">
+                <input type="number" min=1 value=5 id="comment-number">
+            </form>
+        </div>
+        <div id="comments"></div>
+        <form id="comment-box" action="/data" method="POST">
+            <textarea name="comment-input" placeholder="Comment on this page"></textarea>
+            <input value="Send" type="submit">
+        </form>
+        <div id="delete-button">
+            <input id="delete-button" type="button" value="Delete Comments" onclick="deleteComments()">
+        </div>
     </div>
   </body>
 </html>

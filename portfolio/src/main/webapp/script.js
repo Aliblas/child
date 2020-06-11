@@ -9,43 +9,34 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
- /*
-function addRandomGreeting() {
-  const greetings =
-      ['yes', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-*/
 
 function getComments() {
-    console.log('fetching comments from server');
-    
-    fetch('/data').then(response => response.json()).then((commentsJson) => {
+    console.log("fetching comments from server");
+    document.getElementById("comments").innerHTML = "";
 
-        const commentListElt = document.getElementById('comments');
-        commentListElt.innerHtml = '';
+    var commentCapacity = document.getElementById("comment-number").value;
+    
+    fetch("/data?comment-capacity=" + commentCapacity).then(response => response.json()).then((commentsJson) => {
+
+        console.log(commentsJson);
+        const commentSectionElement= document.getElementById("comments");
 
         for (comment of commentsJson) {
-            console.log(comment);
-            commentListElt.appendChild(createListElt(comment));
+            commentSectionElement.appendChild(createCommentElement(comment));
         }
     });
 }
 
-function createListElt(text) {
-    const liElt = document.createElement("LI");
-    liElt.innerText = text;
-    return liElt;
+function createCommentElement(text) {
+    const pElement = document.createElement("p");
+    pElement.innerText = text;
+    return pElement;
+}
+
+function deleteComments() {
+    console.log("fetching deletion");
+    fetch("/delete-data", { method: "post" }).then(response => console.log(response.text()));
+    getComments();
 }
