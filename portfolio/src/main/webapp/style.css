@@ -185,10 +185,6 @@ div.caption {
     padding-bottom: 20px;
 }
 
-#comments li {
-    padding-bottom: 16px;
-}
-
 /* Comment Loader Button Styles */
 
 #show-comments-div {
@@ -225,14 +221,28 @@ div.caption {
     width: 30%;
 }
 
-#delete-button-container {
+#delete-button {
     margin-top: 80px;
     text-align: center;
 }
 
-#delete-button-container input[type="button"] {
+#delete-button input[type="button"] {
     background-color: blueviolet;
     border-style: none;
     color: white;
     padding: 10px;
+}
+
+#comment-box textarea {
+    height: 40px;
+    width: 100%;
+}
+
+#comment-box input[type="submit"] {
+    background-color: blueviolet;
+    border-style: none;
+    color: white;
+    float: right;
+    padding: 10px;
+    width: 100px;
 }

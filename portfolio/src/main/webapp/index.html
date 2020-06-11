@@ -44,11 +44,12 @@
             </form>
         </div>
         <div id="comments"></div>
-        <form action="/data" method="POST">
-            <input type="text" name="comment-input">
+        <form id="comment-box" action="/data" method="POST">
+            <textarea name="comment-input" placeholder="Comment on this page"></textarea>
+            <input value="Send" type="submit">
         </form>
-        <div id="delete-button-container">
-            <input type="button" value="Delete Comments" onclick="deleteComments()">
+        <div id="delete-button">
+            <input id="delete-button" type="button" value="Delete Comments" onclick="deleteComments()">
         </div>
     </div>
   </body>
