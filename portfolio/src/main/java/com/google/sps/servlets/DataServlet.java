@@ -62,8 +62,6 @@ public class DataServlet extends HttpServlet {
     String commentsJson = new Gson().toJson(commentsList);
     response.setContentType("application/json;");
     response.getWriter().println(commentsJson);
-
-    //response.sendRedirect("/index.html");
   }
 
   @Override
