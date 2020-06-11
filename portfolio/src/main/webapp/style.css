@@ -85,6 +85,10 @@ ul {
     width: 30%;
 }
 
+.grey-text {
+    color: grey;
+}
+
 img.right {
     float: right;
     margin-right: 25%;

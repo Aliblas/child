@@ -50,7 +50,6 @@ public class DataServlet extends HttpServlet {
     List<String> commentsList = new ArrayList<>();
     Iterator<Entity> entityIterator = results.asIterator();
     for (int i = 0; i < commentCapacity; i++) {
-        
         if (!entityIterator.hasNext()) break;
         Entity entity = entityIterator.next();
 
@@ -67,8 +66,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String commentString = request.getParameter("comment-input");
-      if (commentString.length() > 0) {
-          
+      if (!commentString.isEmpty()) {
           Entity commentEntity = new Entity("Comment");
           commentEntity.setProperty("commentString", commentString);
 
