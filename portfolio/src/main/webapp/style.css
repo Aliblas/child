@@ -246,3 +246,11 @@ div.caption {
     padding: 10px;
     width: 100px;
 }
+
+#commentsContainer input[type="button"]:hover {
+    cursor: pointer;
+}
+
+#commentsContainer input[type="submit"]:hover {
+    cursor:pointer;
+}
