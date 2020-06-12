@@ -30,6 +30,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -39,7 +41,7 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Query query = new Query("Comment");
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
     String queryString = request.getParameter("comment-capacity");
@@ -67,8 +69,7 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String commentString = request.getParameter("comment-input");
       if (!commentString.isEmpty()) {
-          Entity commentEntity = new Entity("Comment");
-          commentEntity.setProperty("commentString", commentString);
+          Entity commentEntity = createCommentEntity(commentString);
 
           DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
           datastore.put(commentEntity);
@@ -76,6 +77,18 @@ public class DataServlet extends HttpServlet {
 
       response.sendRedirect("/index.html");
       
+  }
+
+  private Entity createCommentEntity(String text) {
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("timestamp", System.currentTimeMillis());
+      commentEntity.setProperty("commentString", text);
+
+      UserService userService = UserServiceFactory.getUserService();
+      String userEmail = userService.getCurrentUser().getEmail();
+      commentEntity.setProperty("email", userEmail);
+      
+      return commentEntity;
   }
 
 }
