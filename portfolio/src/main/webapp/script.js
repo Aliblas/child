@@ -74,3 +74,7 @@ function commentSender(nickname) {
     </form>`;
     return senderHtml;
 }
+
+function printSettingsPage() {
+    console.print("yes");
+}

@@ -225,7 +225,7 @@ div.caption {
     width: 30%;
 }
 
-#delete-button {
+#center-page-div {
     margin-top: 80px;
     text-align: center;
 }
@@ -257,6 +257,17 @@ div.caption {
 
 #comments-container input[type="submit"]:hover {
     cursor:pointer;
+}
+
+.small-button {
+    background-color: blueviolet;
+    border-style: none;
+    color: white;
+    padding: 10px;
+}
+
+.small-button:hover {
+    cursor: pointer;
 }
 
 .hotpink {
