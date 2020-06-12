@@ -18,6 +18,7 @@ import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -25,24 +26,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Authenticate")
+@WebServlet("/user-data")
 public class LoginServlet extends HttpServlet {
 
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         UserService userService = UserServiceFactory.getUserService();
-        String userId = userService.getCurrentUser().getUserId();
 
-        String nickname = getUserNickname(userId);
-        if (nickname == null) nickname = "Anonymous";
+        JsonObject json = new JsonObject();
 
-        response.getWriter().println("{ \"nickname\" : \"" + nickname + "\" }");
+        if (!userService.isUserLoggedIn()) {
+            String loginUrl = userService.createLoginURL("/");
+            json.addProperty("loginUrl", loginUrl);
+            json.addProperty("userLoggedIn", false);
+        } else {
+            String userId = userService.getCurrentUser().getUserId();
+            String nickname = getUserNickname(userId);
+            if (nickname == null) nickname = "Anonymous";
+            json.addProperty("nickname", nickname);
+            json.addProperty("userLoggedIn", true);
+        }
+
+        response.getWriter().println(json.toString());
     }
 
-    @Override
+    @Override //Implements settings post request
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //nothing
+        
     }
 
     private String getUserNickname(String id) {
@@ -53,7 +64,7 @@ public class LoginServlet extends HttpServlet {
         PreparedQuery results = datastore.prepare(query);
         Entity entity = results.asSingleEntity();
         if (entity == null) {
-        return null;
+            return null;
         }
         String nickname = (String) entity.getProperty("nickname");
         return nickname;

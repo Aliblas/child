@@ -46,14 +46,31 @@ function deleteComments() {
 }
 
 function printCommentSender() {
-    fetch("/Authenticate").then(userData => userData.json()).then(nicknameJson => {
-        console.log(nicknameJson);
+    fetch("/user-data").then(userData => userData.json()).then(Json => {
+        console.log(Json);
         commentSenderDiv = document.getElementById("comment-sender-div");
-        commentSenderDiv.innerHTML =
-        `<p>Posting as <b>${nicknameJson.nickname}</b>. visit <a class="hyperlink" href="/settings">Settings</a> to update nickname.</p>
-        <form id="comment-box" action="/data" method="POST">
-            <textarea name="comment-input" placeholder="Comment on this page"></textarea>
-            <input value="Send" type="submit">
-        </form>`;
+
+        if (Json.userLoggedIn) commentSenderDiv.innerHTML = commentSender(Json.nickname);
+        else commentSenderDiv.innerHTML = LoginLink(Json.loginUrl);
+        
+    }).catch(Json => {
+        console.log("Authentication failed");
+        console.log(Json);
     });
+}
+
+function LoginLink(loginUrl) {
+    linkHtml =
+    `<p><a class="hotpink" href="/${loginUrl}">Login</a> to post a comment.</p>`;
+    return linkHtml;
+}
+
+function commentSender(nickname) {
+    senderHtml = 
+    `<p>Posting as <span class="hotpink"><b>${nickname}</b></span>. Visit <a class="hotpink" href="/settings">Settings</a> to update nickname.</p>
+    <form id="comment-box" action="/data" method="POST">
+        <textarea name="comment-input" placeholder="Comment on this page"></textarea>
+        <input value="Send" type="submit">
+    </form>`;
+    return senderHtml;
 }
