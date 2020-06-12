@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
@@ -24,24 +25,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("login")
+@WebServlet("/Authenticate")
 public class LoginServlet extends HttpServlet {
 
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-
+        response.setContentType("application/json");
         UserService userService = UserServiceFactory.getUserService();
-        String urlOrigin = "/index.html";
+        String userId = userService.getCurrentUser().getUserId();
 
-        if (userService.isUserLoggedIn()) {
-            printCommentSenderHtml();
-        } else {
-            System.out.println("Goto login page");
-        }
+        String nickname = getUserNickname(userId);
+        if (nickname == null) nickname = "Anonymous";
+
+        response.getWriter().println("{ \"nickname\" : \"" + nickname + "\" }");
     }
 
-    private void printCommentSenderHtml() {
-        System.out.println("create comment submission box");
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //nothing
+    }
+
+    private String getUserNickname(String id) {
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        Query query =
+            new Query("UserInfo")
+                .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
+        PreparedQuery results = datastore.prepare(query);
+        Entity entity = results.asSingleEntity();
+        if (entity == null) {
+        return null;
+        }
+        String nickname = (String) entity.getProperty("nickname");
+        return nickname;
     }
 }
