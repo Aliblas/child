@@ -258,3 +258,7 @@ div.caption {
 #comments-container input[type="submit"]:hover {
     cursor:pointer;
 }
+
+a.hyperlink {
+    color: hotpink;
+}

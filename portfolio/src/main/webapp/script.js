@@ -50,7 +50,7 @@ function printCommentSender() {
         console.log(nicknameJson);
         commentSenderDiv = document.getElementById("comment-sender-div");
         commentSenderDiv.innerHTML =
-        `<p>Posting as <b>${nicknameJson["nickname"]}</b></p>
+        `<p>Posting as <b>${nicknameJson.nickname}</b>. visit <a class="hyperlink" href="/settings">Settings</a> to update nickname.</p>
         <form id="comment-box" action="/data" method="POST">
             <textarea name="comment-input" placeholder="Comment on this page"></textarea>
             <input value="Send" type="submit">
