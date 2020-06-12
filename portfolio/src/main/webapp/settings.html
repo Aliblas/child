@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>    
+        <meta charset="UTF-8">
+        <title>Ali Bashir's Projects</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div class = "center">
+            <h1>Settings</h1>
+            <form action="/settings" method="POST">
+                <label for="nickname-input">Set Nickname: </label>
+                <input id="nickname-input" type="text">
+                <input class="small-button" type="submit">        
+            </form>
+            <form action="/logout">
+                <input class="small-button" type="button" value="Logout">
+            </form>
+            <div class="delete-able-comments">
+                <div>
+                    <input class="small-button" type="button" value="Delete Comments" href="deleteComments()">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
