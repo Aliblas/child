@@ -11,6 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // limitations under the License.
 
+window.onload = function() {
+    getComments();
+    printCommentSender();
+}
 
 function getComments() {
     console.log("fetching comments from server");
@@ -39,4 +43,17 @@ function deleteComments() {
     console.log("fetching deletion");
     fetch("/delete-data", { method: "post" }).then(response => console.log(response.text()));
     getComments();
+}
+
+function printCommentSender() {
+    fetch("/Authenticate").then(userData => userData.json()).then(nicknameJson => {
+        console.log(nicknameJson);
+        commentSenderDiv = document.getElementById("comment-sender-div");
+        commentSenderDiv.innerHTML =
+        `<p>Posting as <b>${nicknameJson.nickname}</b>. visit <a class="hyperlink" href="/settings">Settings</a> to update nickname.</p>
+        <form id="comment-box" action="/data" method="POST">
+            <textarea name="comment-input" placeholder="Comment on this page"></textarea>
+            <input value="Send" type="submit">
+        </form>`;
+    });
 }

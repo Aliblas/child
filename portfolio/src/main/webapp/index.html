@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getComments()">
+  <body>
 
     <div id="header-pos" class="page-top underline">
         <h1>Ali's Portfolio</h1>
@@ -43,10 +43,12 @@
             </form>
         </div>
         <div id="comments"></div>
+        <div id="comment-sender-div"><!--
         <form id="comment-box" action="/data" method="POST">
             <textarea name="comment-input" placeholder="Comment on this page"></textarea>
             <input value="Send" type="submit">
-        </form>
+        </form>-->
+        </div>
         <div id="delete-button">
             <input id="delete-button" type="button" value="Delete Comments" onclick="deleteComments()">
         </div>
