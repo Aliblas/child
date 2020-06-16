@@ -31,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
     String urlToRedirectToAfterUserLogsOut = "/index.html";
     String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-    System.out.println("logoutUrl: "+logoutUrl);
+    System.out.println("logoutUrl: " + logoutUrl);
 
     response.sendRedirect(logoutUrl);
 

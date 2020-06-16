@@ -44,9 +44,9 @@ public class LoginServlet extends HttpServlet {
             json.addProperty("loginUrl", loginUrl);
             json.addProperty("userLoggedIn", false);
         } else {
-            String nickname = null; //add fetch from userpublicprofile entities
+            String nickname = getCurrentUserNickname();
             if (nickname == null) {
-                nickname = "Anonymous";
+                nickname = "Nameless-individual";
             }
             json.addProperty("nickname", nickname);
             json.addProperty("userLoggedIn", true);
@@ -61,12 +61,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nickname = request.getParameter("nickname-input");
-        nickname = escapeSpecialChars(nickname);
 
         if (nickname == null) {
             System.out.println("invalid nickname requested");
             return;
         }
+
+        nickname = escapeSpecialChars(nickname);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         UserService userService = UserServiceFactory.getUserService();
@@ -102,5 +103,22 @@ public class LoginServlet extends HttpServlet {
             builder.append( c );
     }
     return builder.toString();
+  }
+
+  private String getCurrentUserNickname() {
+    UserService userService = UserServiceFactory.getUserService();
+    String userEmail = userService.getCurrentUser().getEmail();
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Key userKey = KeyFactory.createKey("userPublicProfile", userEmail);
+    String nickname;
+
+    try {
+        Entity userEntity = datastore.get(userKey);
+        nickname = (String)userEntity.getProperty("nickname");
+    } catch(Exception e) {
+        return null;
+    }
+
+    return nickname;
   }
 }

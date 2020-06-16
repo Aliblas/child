@@ -102,7 +102,7 @@ public class DataServlet extends HttpServlet {
         nickname = (String)userEntity.getProperty("nickname");
         commentEntity.setProperty("nickname", nickname);
       } catch(Exception e) {
-        commentEntity.setProperty("nickname", "Anonymous");
+        commentEntity.setProperty("nickname", "Nameless One");
       }
       
       return commentEntity;

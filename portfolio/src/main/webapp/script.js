@@ -82,7 +82,3 @@ function commentSender() {
     </form>`;
     return senderHtml;
 }
-
-function printSettingsPage() {
-    console.log("yes");
-}
