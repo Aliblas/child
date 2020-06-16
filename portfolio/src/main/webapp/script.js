@@ -75,7 +75,7 @@ function LoginLink(loginUrl) {
 
 function commentSender() {
     senderHtml = 
-    `<p>Posting as <span class="hotpink"><b id="nickname-space"></b></span>. Visit <a class="hotpink" href="/settings.html">Settings</a> to update nickname.</p>
+    `<p>Commenting as <span class="hotpink"><b id="nickname-space"></b></span>. Visit <a class="hotpink" href="/settings.html">Settings</a> to update nickname.</p>
     <form id="comment-box" action="/data" method="POST">
         <textarea name="comment-input" placeholder="Comment on this page"></textarea>
         <input value="Send" type="submit">

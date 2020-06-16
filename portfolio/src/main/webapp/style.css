@@ -259,6 +259,10 @@ div.caption {
     cursor:pointer;
 }
 
+#comment-sender-div {
+    margin-bottom: 40px;
+}
+
 .small-button {
     background-color: blueviolet;
     border-style: none;
