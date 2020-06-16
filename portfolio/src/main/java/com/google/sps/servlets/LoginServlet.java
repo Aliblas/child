@@ -29,6 +29,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/user-data")
 public class LoginServlet extends HttpServlet {
 
+    // doGet is used by comment sumbission area.
+    // if user is logged in: Provides user-data for sending comments.
+    // if user is logged out: provides login link.
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
@@ -41,9 +44,10 @@ public class LoginServlet extends HttpServlet {
             json.addProperty("loginUrl", loginUrl);
             json.addProperty("userLoggedIn", false);
         } else {
-            String userId = userService.getCurrentUser().getUserId();
-            String nickname = getUserNickname(userId);
-            if (nickname == null) nickname = "Anonymous";
+            String nickname = null; //add fetch from userpublicprofile entities
+            if (nickname == null) {
+                nickname = "Anonymous";
+            }
             json.addProperty("nickname", nickname);
             json.addProperty("userLoggedIn", true);
         }
@@ -51,22 +55,52 @@ public class LoginServlet extends HttpServlet {
         response.getWriter().println(json.toString());
     }
 
-    @Override //Implements settings post request
+    // doPost implements settings.html post request.
+    // Associates settings input with user account entity in datastore.
+    // Relevant entities contain public profile information only.
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+        String nickname = request.getParameter("nickname-input");
+        nickname = escapeSpecialChars(nickname);
+
+        if (nickname == null) {
+            System.out.println("invalid nickname requested");
+            return;
+        }
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        UserService userService = UserServiceFactory.getUserService();
+        String userEmail = userService.getCurrentUser().getEmail();
+
+        Entity entity = new Entity("userPublicProfile", userEmail);
+        entity.setProperty("nickname", nickname);
+
+        datastore.put(entity);
+
+        response.sendRedirect("/settings.html");
     }
 
-    private String getUserNickname(String id) {
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        Query query =
-            new Query("UserInfo")
-                .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
-        PreparedQuery results = datastore.prepare(query);
-        Entity entity = results.asSingleEntity();
-        if (entity == null) {
-            return null;
-        }
-        String nickname = (String) entity.getProperty("nickname");
-        return nickname;
+    // https://stackoverflow.com/questions/3844595/
+
+  private String escapeSpecialChars(String str) {
+    StringBuilder builder = new StringBuilder();
+    for( char c : str.toCharArray() )
+    {
+        if( c == '\'' )
+            builder.append( "\\'" );
+        else if ( c == '\"' )
+            builder.append( "\\\"" );
+        else if( c == '\r' )
+            builder.append( "\\r" );
+        else if( c == '\n' )
+            builder.append( "\\n" );
+        else if( c == '\t' )
+            builder.append( "\\t" );
+        else if( c < 32 || c >= 127 )
+            builder.append( String.format( "\\u%04x", (int)c ) );
+        else
+            builder.append( c );
     }
+    return builder.toString();
+  }
 }

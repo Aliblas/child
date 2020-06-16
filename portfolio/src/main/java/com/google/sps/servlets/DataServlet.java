@@ -32,6 +32,8 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Key;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -55,9 +57,11 @@ public class DataServlet extends HttpServlet {
         if (!entityIterator.hasNext()) break;
         Entity entity = entityIterator.next();
 
-        long id = entity.getKey().getId();
         String commentString = (String)entity.getProperty("commentString");
-        commentsList.add(commentString);
+        String nickname = (String)entity.getProperty("nickname");
+
+        String commentDatum = createJsonComment(nickname, commentString);
+        commentsList.add(commentDatum);
     }
 
     String commentsJson = new Gson().toJson(commentsList);
@@ -68,6 +72,8 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String commentString = request.getParameter("comment-input");
+      commentString = escapeSpecialChars(commentString);
+
       if (!commentString.isEmpty()) {
           Entity commentEntity = createCommentEntity(commentString);
 
@@ -80,15 +86,56 @@ public class DataServlet extends HttpServlet {
   }
 
   private Entity createCommentEntity(String text) {
+      
       Entity commentEntity = new Entity("Comment");
       commentEntity.setProperty("timestamp", System.currentTimeMillis());
       commentEntity.setProperty("commentString", text);
 
+      //
       UserService userService = UserServiceFactory.getUserService();
       String userEmail = userService.getCurrentUser().getEmail();
-      commentEntity.setProperty("email", userEmail);
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      Key userKey = KeyFactory.createKey("userPublicProfile", userEmail);
+      String nickname;
+      try {
+        Entity userEntity = datastore.get(userKey);
+        nickname = (String)userEntity.getProperty("nickname");
+        commentEntity.setProperty("nickname", nickname);
+      } catch(Exception e) {
+        commentEntity.setProperty("nickname", "Anonymous");
+      }
       
       return commentEntity;
+  }
+
+  private String createJsonComment(String nickname, String comment) {
+      String json = 
+      "{ \"name\" : \"" + nickname + "\", \"comment\" : \"" + comment + "\" }";
+      return json;
+  }
+
+// https://stackoverflow.com/questions/3844595/
+
+  private String escapeSpecialChars(String str) {
+    StringBuilder builder = new StringBuilder();
+    for( char c : str.toCharArray() )
+    {
+        if( c == '\'' )
+            builder.append( "\\'" );
+        else if ( c == '\"' )
+            builder.append( "\\\"" );
+        else if( c == '\r' )
+            builder.append( "\\r" );
+        else if( c == '\n' )
+            builder.append( "\\n" );
+        else if( c == '\t' )
+            builder.append( "\\t" );
+        else if( c < 32 || c >= 127 )
+            builder.append( String.format( "\\u%04x", (int)c ) );
+        else
+            builder.append( c );
+    }
+    return builder.toString();
   }
 
 }

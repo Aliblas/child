@@ -9,17 +9,17 @@
     <body>
         <div class = "center">
             <h1>Settings</h1>
-            <form action="/settings" method="POST">
+            <form id="nickname-form" action="/user-data" method="POST">
                 <label for="nickname-input">Set Nickname: </label>
-                <input id="nickname-input" type="text">
+                <input name="nickname-input" type="text">
                 <input class="small-button" type="submit">        
             </form>
             <form action="/logout">
-                <input class="small-button" type="button" value="Logout">
+                <input class="down-shifted small-button" type="submit" value="Logout">
             </form>
             <div class="delete-able-comments">
                 <div>
-                    <input class="small-button" type="button" value="Delete Comments" href="deleteComments()">
+                    <input class="down-shifted small-button" type="button" value="Delete Comments" onclick="deleteComments()">
                 </div>
             </div>
         </div>

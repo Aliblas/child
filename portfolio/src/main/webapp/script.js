@@ -16,58 +16,66 @@ window.onload = function() {
     printCommentSender();
 }
 
+
+
 function getComments() {
-    console.log("fetching comments from server");
     document.getElementById("comments").innerHTML = "";
 
     var commentCapacity = document.getElementById("comment-number").value;
     
     fetch("/data?comment-capacity=" + commentCapacity).then(response => response.json()).then((commentsJson) => {
 
-        console.log(commentsJson);
         const commentSectionElement= document.getElementById("comments");
 
         for (comment of commentsJson) {
-            commentSectionElement.appendChild(createCommentElement(comment));
+            console.log(comment);
+            json = JSON.parse(comment);
+            commentSectionElement.appendChild(createcommentElementFromJson(json));
         }
     });
 }
 
-function createCommentElement(text) {
-    const pElement = document.createElement("p");
-    pElement.innerText = text;
-    return pElement;
+function createcommentElementFromJson(json) {
+    
+    var nameElement = document.createElement("b");
+    var nameText = document.createTextNode(json.name + ": ");
+    nameElement.appendChild(nameText);
+    var commentText = document.createTextNode(json.comment);
+
+    var comment = document.createElement("p");
+    comment.appendChild(nameElement);
+    comment.appendChild(commentText);
+    return comment;
 }
 
 function deleteComments() {
-    console.log("fetching deletion");
     fetch("/delete-data", { method: "post" }).then(response => console.log(response.text()));
     getComments();
 }
 
 function printCommentSender() {
     fetch("/user-data").then(userData => userData.json()).then(Json => {
-        console.log(Json);
         commentSenderDiv = document.getElementById("comment-sender-div");
 
-        if (Json.userLoggedIn) commentSenderDiv.innerHTML = commentSender(Json.nickname);
-        else commentSenderDiv.innerHTML = LoginLink(Json.loginUrl);
+        if (Json.userLoggedIn) {
+            commentSenderDiv.innerHTML = commentSender(Json.nickname);
+            document.getElementById("nickname-space").innerText = Json.nickname;
+        } else {
+            commentSenderDiv.innerHTML = LoginLink(Json.loginUrl);
+        }
         
-    }).catch(Json => {
-        console.log("Authentication failed");
-        console.log(Json);
     });
 }
 
 function LoginLink(loginUrl) {
     linkHtml =
-    `<p><a class="hotpink" href="/${loginUrl}">Login</a> to post a comment.</p>`;
+    `<p><a class="hotpink" href="${loginUrl}">Login</a> to post a comment.</p>`;
     return linkHtml;
 }
 
-function commentSender(nickname) {
+function commentSender() {
     senderHtml = 
-    `<p>Posting as <span class="hotpink"><b>${nickname}</b></span>. Visit <a class="hotpink" href="/settings">Settings</a> to update nickname.</p>
+    `<p>Posting as <span class="hotpink"><b id="nickname-space"></b></span>. Visit <a class="hotpink" href="/settings.html">Settings</a> to update nickname.</p>
     <form id="comment-box" action="/data" method="POST">
         <textarea name="comment-input" placeholder="Comment on this page"></textarea>
         <input value="Send" type="submit">
@@ -76,5 +84,5 @@ function commentSender(nickname) {
 }
 
 function printSettingsPage() {
-    console.print("yes");
+    console.log("yes");
 }

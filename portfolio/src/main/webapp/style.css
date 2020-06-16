@@ -98,7 +98,7 @@ img.right {
 
 /* selector adds padding above element */
 .down-shifted {
-    padding-top: 40px;
+    margin-top: 40px;
     overflow: auto;
 }
 
