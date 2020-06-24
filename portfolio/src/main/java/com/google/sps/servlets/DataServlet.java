@@ -41,7 +41,6 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
@@ -82,24 +81,21 @@ public class DataServlet extends HttpServlet {
       }
 
       response.sendRedirect("/index.html");
-      
   }
 
   private Entity createCommentEntity(String text) {
-      
       Entity commentEntity = new Entity("Comment");
       commentEntity.setProperty("timestamp", System.currentTimeMillis());
       commentEntity.setProperty("commentString", text);
 
-      //
       UserService userService = UserServiceFactory.getUserService();
       String userEmail = userService.getCurrentUser().getEmail();
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key userKey = KeyFactory.createKey("userPublicProfile", userEmail);
-      String nickname;
+      
       try {
         Entity userEntity = datastore.get(userKey);
-        nickname = (String)userEntity.getProperty("nickname");
+        String nickname = (String)userEntity.getProperty("nickname");
         commentEntity.setProperty("nickname", nickname);
       } catch(Exception e) {
         commentEntity.setProperty("nickname", "Nameless One");
@@ -118,25 +114,24 @@ public class DataServlet extends HttpServlet {
 
   private String escapeSpecialChars(String str) {
     StringBuilder builder = new StringBuilder();
-    for( char c : str.toCharArray() )
-    {
-        if( c == '\'' )
-            builder.append( "\\'" );
-        else if ( c == '\"' )
-            builder.append( "\\\"" );
-        else if( c == '\r' )
-            builder.append( "\\r" );
-        else if( c == '\n' )
-            builder.append( "\\n" );
-        else if( c == '\t' )
-            builder.append( "\\t" );
-        else if( c < 32 || c >= 127 )
-            builder.append( String.format( "\\u%04x", (int)c ) );
-        else
-            builder.append( c );
+    for (char c : str.toCharArray()) {
+        if (c == '\'') {
+            builder.append("\\'");
+        } else if (c == '\"') {
+            builder.append("\\\"");
+        } else if(c == '\r') {
+            builder.append("\\r");
+        } else if(c == '\n') {
+            builder.append("\\n");
+        } else if(c == '\t') {
+            builder.append("\\t");
+        } else if(c < 32 || c >= 127 ) {
+            builder.append(String.format("\\u%04x", (int)c));
+        } else {
+            builder.append(c);
+        }
     }
     return builder.toString();
   }
-
 }
 

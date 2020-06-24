@@ -21,7 +21,7 @@ window.onload = function() {
 function getComments() {
     document.getElementById("comments").innerHTML = "";
 
-    var commentCapacity = document.getElementById("comment-number").value;
+    let commentCapacity = document.getElementById("comment-number").value;
     
     fetch("/data?comment-capacity=" + commentCapacity).then(response => response.json()).then((commentsJson) => {
 
@@ -36,13 +36,12 @@ function getComments() {
 }
 
 function createcommentElementFromJson(json) {
-    
-    var nameElement = document.createElement("b");
-    var nameText = document.createTextNode(json.name + ": ");
+    let nameElement = document.createElement("b");
+    let nameText = document.createTextNode(json.name + ": ");
     nameElement.appendChild(nameText);
-    var commentText = document.createTextNode(json.comment);
+    let commentText = document.createTextNode(json.comment);
 
-    var comment = document.createElement("p");
+    let comment = document.createElement("p");
     comment.appendChild(nameElement);
     comment.appendChild(commentText);
     return comment;
@@ -58,16 +57,17 @@ function printCommentSender() {
         commentSenderDiv = document.getElementById("comment-sender-div");
 
         if (Json.userLoggedIn) {
-            commentSenderDiv.innerHTML = commentSender(Json.nickname);
+            commentSenderJs(commentSenderDiv);
+            //commentSenderDiv.innerHTML = commentSender();
             document.getElementById("nickname-space").innerText = Json.nickname;
         } else {
-            commentSenderDiv.innerHTML = LoginLink(Json.loginUrl);
+            commentSenderDiv.innerHTML = loginLink(Json.loginUrl);
         }
         
     });
 }
 
-function LoginLink(loginUrl) {
+function loginLink(loginUrl) {
     linkHtml =
     `<p><a class="hotpink" href="${loginUrl}">Login</a> to post a comment.</p>`;
     return linkHtml;
@@ -81,4 +81,42 @@ function commentSender() {
         <input value="Send" type="submit">
     </form>`;
     return senderHtml;
+}
+
+function commentSenderJs(parentDiv) {
+    let nicknameBold = document.createElement("b");
+    nicknameBold.id = "nickname-space";
+    let nicknameSpan = document.createElement("span");
+    nicknameSpan.classList.add("hotpink");
+    nicknameSpan.appendChild(nicknameBold);
+
+    let settingsAnchor = document.createElement("a");
+    settingsAnchor.classList.add("hotpink");
+    settingsAnchor.href = "/settings.html";
+    settingsAnchor.innerText = "Settings";
+
+    let para = document.createElement("p");
+    para.appendChild(document.createTextNode("Commenting as "));
+    para.appendChild(nicknameSpan);
+    para.appendChild(document.createTextNode(". Visit "));
+    para.appendChild(settingsAnchor);
+    para.appendChild(document.createTextNode(" to update nickname."));
+
+    let textArea = document.createElement("textarea");
+    textArea.name = "comment-input";
+    textArea.placeholder = "Comment on this page";
+
+    let submitter = document.createElement("input");
+    submitter.value = "Send";
+    submitter.type = "submit";
+
+    let form = document.createElement("form");
+    form.id = "comment-box";
+    form.action = "/data";
+    form.method = "POST";
+    form.appendChild(textArea);
+    form.appendChild(submitter);
+
+    parentDiv.appendChild(para);
+    parentDiv.appendChild(form);
 }
