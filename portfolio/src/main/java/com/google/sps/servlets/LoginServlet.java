@@ -45,9 +45,6 @@ public class LoginServlet extends HttpServlet {
             json.addProperty("userLoggedIn", false);
         } else {
             String nickname = getCurrentUserNickname();
-            if (nickname == null) {
-                nickname = "Nameless-individual";
-            }
             json.addProperty("nickname", nickname);
             json.addProperty("userLoggedIn", true);
         }
@@ -85,22 +82,22 @@ public class LoginServlet extends HttpServlet {
 
   private String escapeSpecialChars(String str) {
     StringBuilder builder = new StringBuilder();
-    for( char c : str.toCharArray() )
-    {
-        if( c == '\'' )
-            builder.append( "\\'" );
-        else if ( c == '\"' )
-            builder.append( "\\\"" );
-        else if( c == '\r' )
-            builder.append( "\\r" );
-        else if( c == '\n' )
-            builder.append( "\\n" );
-        else if( c == '\t' )
-            builder.append( "\\t" );
-        else if( c < 32 || c >= 127 )
-            builder.append( String.format( "\\u%04x", (int)c ) );
-        else
-            builder.append( c );
+    for (char c : str.toCharArray()) {
+        if (c == '\'') {
+            builder.append("\\'");
+        } else if (c == '\"') {
+            builder.append("\\\"");
+        } else if(c == '\r') {
+            builder.append("\\r");
+        } else if(c == '\n') {
+            builder.append("\\n");
+        } else if(c == '\t') {
+            builder.append("\\t");
+        } else if(c < 32 || c >= 127 ) {
+            builder.append(String.format("\\u%04x", (int)c));
+        } else {
+            builder.append(c);
+        }
     }
     return builder.toString();
   }
@@ -116,7 +113,8 @@ public class LoginServlet extends HttpServlet {
         Entity userEntity = datastore.get(userKey);
         nickname = (String)userEntity.getProperty("nickname");
     } catch(Exception e) {
-        return null;
+        // User has not set nickname, return a default
+        return "Nameless-individual";
     }
 
     return nickname;
