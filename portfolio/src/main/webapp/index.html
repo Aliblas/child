@@ -43,7 +43,20 @@
             </form>
         </div>
 
-        <div id="comment-sender-div"></div>
+
+
+        <div id="comment-sender-div">
+            <div id = "comment-field">
+                <p>Commenting as <span class="hotpink"><b id="nickname-space"></b></span>. Visit <a class="hotpink" href="/settings.html">Settings</a> to update nickname.</p>
+                <form id="comment-box" action="/data" method="POST">
+                    <textarea name="comment-input" placeholder="Comment on this page"></textarea>
+                    <input value="Send" type="submit">
+                </form>
+            </div>
+            <div id = "login-link-div">
+                <p><a id = "login-link" class="hotpink">Login</a> to post a comment.</p>
+            </div>
+        </div>
 
         <div id="comments"></div>
 

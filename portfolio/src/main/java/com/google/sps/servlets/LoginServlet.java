@@ -94,6 +94,7 @@ public class LoginServlet extends HttpServlet {
         } else if(c == '\t') {
             builder.append("\\t");
         } else if(c < 32 || c >= 127 ) {
+            // Format special characters (determine by ascii value)
             builder.append(String.format("\\u%04x", (int)c));
         } else {
             builder.append(c);
