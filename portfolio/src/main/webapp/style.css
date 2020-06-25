@@ -98,7 +98,7 @@ img.right {
 
 /* selector adds padding above element */
 .down-shifted {
-    padding-top: 40px;
+    margin-top: 40px;
     overflow: auto;
 }
 
@@ -225,7 +225,7 @@ div.caption {
     width: 30%;
 }
 
-#delete-button {
+#center-page-div {
     margin-top: 80px;
     text-align: center;
 }
@@ -259,6 +259,21 @@ div.caption {
     cursor:pointer;
 }
 
-a.hyperlink {
+#comment-sender-div {
+    margin-bottom: 40px;
+}
+
+.small-button {
+    background-color: blueviolet;
+    border-style: none;
+    color: white;
+    padding: 10px;
+}
+
+.small-button:hover {
+    cursor: pointer;
+}
+
+.hotpink {
     color: hotpink;
 }

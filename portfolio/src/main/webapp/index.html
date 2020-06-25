@@ -42,15 +42,15 @@
                 <input type="number" min=1 value=5 id="comment-number">
             </form>
         </div>
+
+        <div id="comment-sender-div"></div>
+
         <div id="comments"></div>
-        <div id="comment-sender-div"><!--
-        <form id="comment-box" action="/data" method="POST">
-            <textarea name="comment-input" placeholder="Comment on this page"></textarea>
-            <input value="Send" type="submit">
-        </form>-->
-        </div>
-        <div id="delete-button">
-            <input id="delete-button" type="button" value="Delete Comments" onclick="deleteComments()">
+
+        <div id="center-page-div">
+            <form action="/settings.html">
+                <input class="small-button" type="submit" value="Delete comments" >
+            </form>
         </div>
     </div>
   </body>
