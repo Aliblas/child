@@ -30,12 +30,12 @@ function getComments() {
         for (comment of commentsJson) {
             console.log(comment);
             json = JSON.parse(comment);
-            commentSectionElement.appendChild(createcommentElementFromJson(json));
+            commentSectionElement.appendChild(createCommentElementFromJson(json));
         }
     });
 }
 
-function createcommentElementFromJson(json) {
+function createCommentElementFromJson(json) {
     let nameElement = document.createElement("b");
     let nameText = document.createTextNode(json.name + ": ");
     nameElement.appendChild(nameText);
@@ -54,69 +54,16 @@ function deleteComments() {
 
 function printCommentSender() {
     fetch("/user-data").then(userData => userData.json()).then(Json => {
-        commentSenderDiv = document.getElementById("comment-sender-div");
-
+        commentField = document.getElementById("comment-field");
+        loginLinkDiv = document.getElementById("login-link-div");
         if (Json.userLoggedIn) {
-            commentSenderJs(commentSenderDiv);
-            //commentSenderDiv.innerHTML = commentSender();
+            commentField.style.display = "block";
+            loginLinkDiv.style.display = "none";
             document.getElementById("nickname-space").innerText = Json.nickname;
         } else {
-            commentSenderDiv.innerHTML = loginLink(Json.loginUrl);
+            commentField.style.display = "none";
+            loginLinkDiv.style.display = "block";
+            document.getElementById("login-link").href = Json.loginUrl;
         }
-        
     });
-}
-
-function loginLink(loginUrl) {
-    linkHtml =
-    `<p><a class="hotpink" href="${loginUrl}">Login</a> to post a comment.</p>`;
-    return linkHtml;
-}
-
-function commentSender() {
-    senderHtml = 
-    `<p>Commenting as <span class="hotpink"><b id="nickname-space"></b></span>. Visit <a class="hotpink" href="/settings.html">Settings</a> to update nickname.</p>
-    <form id="comment-box" action="/data" method="POST">
-        <textarea name="comment-input" placeholder="Comment on this page"></textarea>
-        <input value="Send" type="submit">
-    </form>`;
-    return senderHtml;
-}
-
-function commentSenderJs(parentDiv) {
-    let nicknameBold = document.createElement("b");
-    nicknameBold.id = "nickname-space";
-    let nicknameSpan = document.createElement("span");
-    nicknameSpan.classList.add("hotpink");
-    nicknameSpan.appendChild(nicknameBold);
-
-    let settingsAnchor = document.createElement("a");
-    settingsAnchor.classList.add("hotpink");
-    settingsAnchor.href = "/settings.html";
-    settingsAnchor.innerText = "Settings";
-
-    let para = document.createElement("p");
-    para.appendChild(document.createTextNode("Commenting as "));
-    para.appendChild(nicknameSpan);
-    para.appendChild(document.createTextNode(". Visit "));
-    para.appendChild(settingsAnchor);
-    para.appendChild(document.createTextNode(" to update nickname."));
-
-    let textArea = document.createElement("textarea");
-    textArea.name = "comment-input";
-    textArea.placeholder = "Comment on this page";
-
-    let submitter = document.createElement("input");
-    submitter.value = "Send";
-    submitter.type = "submit";
-
-    let form = document.createElement("form");
-    form.id = "comment-box";
-    form.action = "/data";
-    form.method = "POST";
-    form.appendChild(textArea);
-    form.appendChild(submitter);
-
-    parentDiv.appendChild(para);
-    parentDiv.appendChild(form);
 }
