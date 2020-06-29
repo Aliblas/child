@@ -291,9 +291,8 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void OnlyOptionalAttendeesConsidered() {
-    // Have each person have different events. We should see two options because each person has
-    // split the restricted times.
+  public void onlyOptionalAttendeesConsidered() {
+    // Have each optional person have different events, no required persons. We should see three options
     //
     // Events  :       |--A--|     |--B--|
     // Day     : |-----------------------------|

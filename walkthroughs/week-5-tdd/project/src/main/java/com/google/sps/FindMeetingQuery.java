@@ -80,11 +80,12 @@ public final class FindMeetingQuery {
     }
 
     private ArrayList<TimeRange> sortCombineOverlappingTimeRanges(ArrayList<TimeRange> eventRanges) {
-        Collections.sort(eventRanges, TimeRange.ORDER_BY_START);
+
         if (eventRanges.isEmpty()) {
             return new ArrayList<TimeRange>();
         }
-
+        
+        Collections.sort(eventRanges, TimeRange.ORDER_BY_START);
         ArrayList<TimeRange> result = new ArrayList<>();
         Iterator<TimeRange> timeRangeIt = eventRanges.iterator();
         TimeRange nextRange = timeRangeIt.next();
