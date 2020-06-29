@@ -48,18 +48,14 @@ public final class FindMeetingQuery {
     public Collection<TimeRange> queryHelper(Collection<Event> events, MeetingRequest request) {
 
         // Remove events that do not share in required attendees.
-        ArrayList<Event> eventList = new ArrayList<>(events);
+        // Construct a list of timeranges from these events.
         AttendeeHelper attendees = new AttendeeHelper(request.getAttendees());
         
-        Iterator<Event> eventIt = eventList.iterator();
-        while (eventIt.hasNext()) {
-            if (!attendees.eventHasAttendees(eventIt.next())) {
-                eventIt.remove();
-            }
-        }
         ArrayList<TimeRange> eventTimeRanges = new ArrayList<>();
-        for (Event event : eventList) {
-            eventTimeRanges.add(event.getWhen());
+        for (Event event : events) {
+            if (attendees.eventHasAttendees(event)) {
+                eventTimeRanges.add(event.getWhen());
+            }
         }
         
         ArrayList<TimeRange> occupiedTimeRanges = sortCombineOverlappingTimeRanges(eventTimeRanges);
