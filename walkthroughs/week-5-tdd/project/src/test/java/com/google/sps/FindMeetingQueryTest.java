@@ -319,6 +319,8 @@ public final class FindMeetingQueryTest {
     Assert.assertEquals(expected, actual);
   }
 
+
+
   @Test
   public void NotEnoughRoomAllOptionalAttendees() {
       // Have two optional attendees with fully conflicting schedules
@@ -338,6 +340,30 @@ public final class FindMeetingQueryTest {
     MeetingRequest request = new MeetingRequest(Arrays.asList(), DURATION_30_MINUTES);
     request.addOptionalAttendee(PERSON_A);
     request.addOptionalAttendee(PERSON_B);
+
+    Collection<TimeRange> actual = query.query(events, request);
+    Collection<TimeRange> expected = Arrays.asList();
+
+    Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void NotEnoughRoomAllRequiredAttendees() {
+      // Have two required attendees with fully conflicting schedules
+      //
+      // Events  : |---A---| |-----B-----| |--A--|
+      // Day     : |-----------------------------|
+      // Options :
+    
+    Collection<Event> events = Arrays.asList(
+        new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_1100AM, false),
+        Arrays.asList(PERSON_A)),
+        new Event("Event 2", TimeRange.fromStartEnd(TIME_1100AM, TIME_0300PM, false),
+        Arrays.asList(PERSON_B)),
+        new Event("Event 1", TimeRange.fromStartEnd(TIME_0300PM, TimeRange.END_OF_DAY, false),
+        Arrays.asList(PERSON_A)));
+    
+    MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
 
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected = Arrays.asList();
